@@ -1,0 +1,29 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--muted);
+    border-radius: 5px;
+    border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+/* Selection Color */
+::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}

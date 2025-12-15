@@ -1,0 +1,19 @@
+{
+    "name": "Abhay Vishwakarma Portfolio",
+    "short_name": "AbhayDev",
+    "icons": [
+        {
+            "src": "/icon-dark-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/apple-icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#020617",
+    "background_color": "#020617",
+    "display": "standalone"
+}
