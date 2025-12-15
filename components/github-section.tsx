@@ -307,12 +307,13 @@ export function GitHubSection() {
                                                                 transition={{ delay: (weekIndex * 0.005) + (dayIndex * 0.01) }}
                                                                 viewport={{ once: true }}
                                                                 whileHover={{ scale: 1.4, zIndex: 20 }}
-                                                                className="w-full aspect-square rounded-[2px] transition-all cursor-pointer relative group nav-item"
-                                                                style={{
-                                                                    backgroundColor: count === 0
-                                                                        ? "hsl(var(--muted))"
-                                                                        : `hsl(var(--primary) / ${Math.min(0.4 + (count / 10) * 0.6, 1)})`
-                                                                }}
+                                                                className={`w-full aspect-square rounded-[2px] transition-all cursor-pointer relative group nav-item ${count === 0
+                                                                        ? "bg-black/5 dark:bg-white/5"
+                                                                        : ""
+                                                                    }`}
+                                                                style={count > 0 ? {
+                                                                    backgroundColor: `hsl(var(--primary) / ${Math.min(0.4 + (count / 10) * 0.6, 1)})`
+                                                                } : undefined}
                                                             >
                                                                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-popover text-popover-foreground text-[10px] font-medium rounded shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
                                                                     {count} contributions
@@ -326,7 +327,7 @@ export function GitHubSection() {
                                                 Array.from({ length: 53 }).map((_, i) => (
                                                     <div key={i} className="space-y-[3px]">
                                                         {Array.from({ length: 7 }).map((_, j) => (
-                                                            <div key={j} className="w-full aspect-square rounded-[2px] bg-muted animate-pulse" />
+                                                            <div key={j} className="w-full aspect-square rounded-[2px] bg-black/5 dark:bg-white/5 animate-pulse" />
                                                         ))}
                                                     </div>
                                                 ))
