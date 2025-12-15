@@ -1,10 +1,22 @@
 "use client"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+import { toast } from "sonner"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Mail, MapPin, Phone, Send } from "lucide-react"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { MagneticButton } from "@/components/magnetic-button"
+
+const formSchema = z.object({
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+})
 
 export function ContactSection() {
   return (
@@ -57,31 +69,7 @@ export function ContactSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 <CardContent className="p-6 md:p-8 relative z-10">
-                  <form className="space-y-6">
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <div className="space-y-2">
-                        <label htmlFor="first-name" className="text-sm font-medium">First name</label>
-                        <Input id="first-name" placeholder="John" required className="bg-background/50 border-white/10 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300" />
-                      </div>
-                      <div className="space-y-2">
-                        <label htmlFor="last-name" className="text-sm font-medium">Last name</label>
-                        <Input id="last-name" placeholder="Doe" required className="bg-background/50 border-white/10 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300" />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">Email</label>
-                      <Input id="email" placeholder="john@example.com" type="email" required className="bg-background/50 border-white/10 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300" />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="message" className="text-sm font-medium">Message</label>
-                      <Textarea id="message" placeholder="Tell me about your project..." className="min-h-[150px] bg-background/50 border-white/10 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300" required />
-                    </div>
-                    <MagneticButton className="w-full md:w-auto">
-                      <button type="submit" className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:scale-[1.02] hover:shadow-primary/25">
-                        Send Message <Send className="w-4 h-4" />
-                      </button>
-                    </MagneticButton>
-                  </form>
+                  <ContactForm />
                 </CardContent>
               </Card>
             </ScrollReveal>
@@ -91,3 +79,114 @@ export function ContactSection() {
     </section>
   )
 }
+
+function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
+  })
+
+  const onSubmit = async (data: any) => {
+    setIsSubmitting(true)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+
+      if (!response.ok) throw new Error("Failed to send message")
+
+      toast.success("Message sent successfully!", {
+        description: "I'll get back to you as soon as possible.",
+      })
+      reset()
+    } catch (error) {
+      toast.error("Something went wrong.", {
+        description: "Please try again later or email me directly.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="space-y-2">
+          <label htmlFor="firstName" className="text-sm font-medium">
+            First name
+          </label>
+          <Input
+            id="firstName"
+            placeholder="John"
+            {...register("firstName")}
+            className="bg-background/50 border-white/10 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+          />
+          {errors.firstName && (
+            <p className="text-xs text-destructive">{errors.firstName.message as string}</p>
+          )}
+        </div>
+        <div className="space-y-2">
+          <label htmlFor="lastName" className="text-sm font-medium">
+            Last name
+          </label>
+          <Input
+            id="lastName"
+            placeholder="Doe"
+            {...register("lastName")}
+            className="bg-background/50 border-white/10 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+          />
+          {errors.lastName && (
+            <p className="text-xs text-destructive">{errors.lastName.message as string}</p>
+          )}
+        </div>
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="email" className="text-sm font-medium">
+          Email
+        </label>
+        <Input
+          id="email"
+          placeholder="john@example.com"
+          type="email"
+          {...register("email")}
+          className="bg-background/50 border-white/10 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+        />
+        {errors.email && (
+          <p className="text-xs text-destructive">{errors.email.message as string}</p>
+        )}
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="message" className="text-sm font-medium">
+          Message
+        </label>
+        <Textarea
+          id="message"
+          placeholder="Tell me about your project..."
+          className="min-h-[150px] bg-background/50 border-white/10 focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+          {...register("message")}
+        />
+        {errors.message && (
+          <p className="text-xs text-destructive">{errors.message.message as string}</p>
+        )}
+      </div>
+      <MagneticButton className="w-full md:w-auto">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full md:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 font-medium text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:scale-[1.02] hover:shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? "Sending..." : "Send Message"}
+          {!isSubmitting && <Send className="w-4 h-4" />}
+        </button>
+      </MagneticButton>
+    </form>
+  )
+}
+
