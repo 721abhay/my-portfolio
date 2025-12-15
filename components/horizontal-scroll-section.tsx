@@ -21,7 +21,7 @@ const projects = [
     {
         title: "CAMPUS CONNECT",
         category: "Web Platform",
-        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop",
+        image: "/images/campus-connect.png",
         href: "#",
     },
     {

@@ -37,11 +37,11 @@ const projects = [
     featured: false,
   },
   {
-    title: "University Portal",
+    title: "Campus Connect",
     category: "Full Stack",
     description: "Comprehensive academic management system handling varied workflows for students, faculty, and administration.",
     tags: ["Java Spring", "React", "MySQL", "AWS"],
-    image: "/images/minimalist-productivity-app.jpg",
+    image: "/images/campus-connect.png",
     github: "https://github.com/721abhay",
     demo: "#",
     colSpan: "md:col-span-1",
