@@ -228,7 +228,7 @@ export function GitHubSection() {
                             </div>
 
                             {/* Timeline Feed */}
-                            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar relative pl-4 max-h-[400px]">
+                            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar relative pl-4 max-h-[400px] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-primary/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary/40">
                                 {/* Vertical Connector Line */}
                                 <div className="absolute left-[27px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-border via-border/50 to-transparent" />
 
@@ -293,8 +293,8 @@ export function GitHubSection() {
                                     {error && <p className="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded">Update GITHUB_TOKEN in .env</p>}
                                 </div>
 
-                                <div className="w-full overflow-x-auto pb-2 scrollbar-hide">
-                                    <div className="min-w-[700px]">
+                                <div className="w-full overflow-x-auto pb-4 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-primary/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary/40">
+                                    <div className="min-w-[760px]">
                                         <div className="grid grid-cols-[repeat(53,1fr)] gap-[3px]">
                                             {contributions.length > 0 ? (
                                                 contributions.map((week, weekIndex) => (
@@ -310,7 +310,7 @@ export function GitHubSection() {
                                                                 className="w-full aspect-square rounded-[2px] transition-all cursor-pointer relative group nav-item"
                                                                 style={{
                                                                     backgroundColor: count === 0
-                                                                        ? "hsl(var(--muted)/0.3)"
+                                                                        ? "rgba(255,255,255,0.03)"
                                                                         : `hsl(var(--primary) / ${Math.min(0.2 + (count / 5) * 0.8, 1)})`
                                                                 }}
                                                             >
