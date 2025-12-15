@@ -228,7 +228,7 @@ export function GitHubSection() {
                             </div>
 
                             {/* Timeline Feed */}
-                            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar relative pl-4 max-h-[400px] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-primary/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary/40">
+                            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar relative pl-4 max-h-[400px] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-muted [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50">
                                 {/* Vertical Connector Line */}
                                 <div className="absolute left-[27px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-border via-border/50 to-transparent" />
 
@@ -293,7 +293,7 @@ export function GitHubSection() {
                                     {error && <p className="text-xs text-red-400 bg-red-500/10 px-2 py-1 rounded">Update GITHUB_TOKEN in .env</p>}
                                 </div>
 
-                                <div className="w-full overflow-x-auto pb-4 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-primary/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-primary/40">
+                                <div className="w-full overflow-x-auto pb-4 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-muted [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/50">
                                     <div className="min-w-[760px]">
                                         <div className="grid grid-cols-[repeat(53,1fr)] gap-[3px]">
                                             {contributions.length > 0 ? (
@@ -310,8 +310,8 @@ export function GitHubSection() {
                                                                 className="w-full aspect-square rounded-[2px] transition-all cursor-pointer relative group nav-item"
                                                                 style={{
                                                                     backgroundColor: count === 0
-                                                                        ? "rgba(255,255,255,0.03)"
-                                                                        : `hsl(var(--primary) / ${Math.min(0.2 + (count / 5) * 0.8, 1)})`
+                                                                        ? "hsl(var(--muted))"
+                                                                        : `hsl(var(--primary) / ${Math.min(0.4 + (count / 10) * 0.6, 1)})`
                                                                 }}
                                                             >
                                                                 <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 bg-popover text-popover-foreground text-[10px] font-medium rounded shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
@@ -322,11 +322,11 @@ export function GitHubSection() {
                                                     </div>
                                                 ))
                                             ) : (
-                                                // Loading Skeleton
+                                                // Loading Skeleton - Ensure contrast
                                                 Array.from({ length: 53 }).map((_, i) => (
                                                     <div key={i} className="space-y-[3px]">
                                                         {Array.from({ length: 7 }).map((_, j) => (
-                                                            <div key={j} className="w-full aspect-square rounded-[2px] bg-muted/20 animate-pulse" />
+                                                            <div key={j} className="w-full aspect-square rounded-[2px] bg-muted animate-pulse" />
                                                         ))}
                                                     </div>
                                                 ))
