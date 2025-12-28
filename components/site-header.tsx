@@ -35,8 +35,8 @@ export function SiteHeader() {
     >
       <div
         className={`relative flex items-center justify-between transition-all duration-300 ${isScrolled
-            ? "w-[95%] md:w-full max-w-5xl rounded-full border border-white/10 bg-background/80 backdrop-blur-xl shadow-2xl px-6 h-16"
-            : "w-full max-w-7xl px-6 md:px-12 h-20 bg-transparent border-transparent"
+          ? "w-[95%] md:w-full max-w-5xl rounded-full border border-white/10 bg-background/80 backdrop-blur-xl shadow-2xl px-6 h-16"
+          : "w-full max-w-7xl px-6 md:px-12 h-20 bg-transparent border-transparent"
           }`}
       >
         <Link href="/" className="text-xl font-bold tracking-tighter hover:scale-105 transition-transform flex items-center gap-2">
@@ -46,14 +46,15 @@ export function SiteHeader() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1 p-1 rounded-full bg-background/50 border border-border/50 backdrop-blur-sm">
-          {["Work", "Experience", "About", "Testimonials", "Contact"].map((item) => (
+          {["Projects", "Certificates", "Experience", "About", "Contact"].map((item) => (
             <Link
               key={item}
               href={`#${item.toLowerCase()}`}
               className="px-4 py-2 text-sm font-medium rounded-full hover:bg-primary/10 hover:text-primary transition-all duration-300"
               onClick={(e) => {
                 e.preventDefault()
-                document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: "smooth" })
+                const sectionId = item === "Projects" ? "projects-showcase" : item === "Certificates" ? "certificates" : item.toLowerCase()
+                document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
               }}
             >
               {item}

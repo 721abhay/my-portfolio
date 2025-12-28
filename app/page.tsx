@@ -18,6 +18,9 @@ import { ServicesSection } from "@/components/services-section"
 import { BackToTop } from "@/components/back-to-top"
 import { HomeEffects } from "@/components/home-effects"
 import { ScrollProgress } from "@/components/scroll-progress"
+import { CertificatesSection } from "@/components/certificates-section"
+import { ProjectsShowcaseSection } from "@/components/projects-showcase-section"
+import { LinkedInSyncButton } from "@/components/linkedin-sync-button"
 
 export default function Page() {
   return (
@@ -38,6 +41,8 @@ export default function Page() {
           <AboutSection />
           <SkillsSection />
           <GitHubSection />
+          <ProjectsShowcaseSection />
+          <CertificatesSection />
           <TimelineSection />
           <TerminalSection />
           <TestimonialsSection />
@@ -50,6 +55,7 @@ export default function Page() {
       {/* ===== FLOATING UI ELEMENTS ===== */}
       <ThemeToggle />
       <BackToTop />
+      <LinkedInSyncButton />
     </div>
   )
 }
