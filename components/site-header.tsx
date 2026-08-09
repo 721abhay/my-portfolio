@@ -1,48 +1,77 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Sun, Moon, Download, Menu, X } from "lucide-react"
 import { useTheme } from "next-themes"
+import { usePortfolio } from "@/lib/portfolio-provider"
 
 const NAV_ITEMS = [
   { label: "Projects", id: "projects" },
   { label: "Services", id: "services" },
-  { label: "Skills", id: "skills" },
-  { label: "About", id: "about" },
-  { label: "Contact", id: "contact" },
+  { label: "Skills",   id: "skills" },
+  { label: "About",    id: "about" },
+  { label: "Contact",  id: "contact" },
 ]
 
 export function SiteHeader() {
   const { theme, setTheme } = useTheme()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { registerAboutClick } = usePortfolio()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
     setOpen(false)
+    if (id === "about") registerAboutClick()
   }
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-14 h-16 bg-[#080808]/90 backdrop-blur-md border-b border-white/[0.06]">
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-14 h-16 border-b transition-all duration-300 ${
+          scrolled
+            ? "bg-[#080808]/98 backdrop-blur-xl border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.6)]"
+            : "bg-[#080808]/90 backdrop-blur-md border-white/[0.06]"
+        }`}
+      >
         {/* Brand */}
-        <Link href="/" className="font-bebas text-2xl tracking-wider text-white flex items-center gap-1">
-          ABHAY<span className="text-red-600">DEV</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse ml-0.5" />
+        <Link href="/" className="font-bebas text-2xl tracking-wider text-white flex items-center gap-1 group">
+          <motion.span whileHover={{ letterSpacing: "0.12em" }} transition={{ duration: 0.3 }}>
+            ABHAY<span className="text-red-600">DEV</span>
+          </motion.span>
+          <motion.span
+            animate={{ scale: [1, 1.5, 1], opacity: [1, 0.4, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-1.5 h-1.5 rounded-full bg-red-600 ml-0.5"
+          />
         </Link>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-0">
-          {NAV_ITEMS.map((item) => (
-            <button
+          {NAV_ITEMS.map((item, i) => (
+            <motion.button
               key={item.id}
               onClick={() => scrollTo(item.id)}
-              className="px-4 py-2 font-bebas text-sm tracking-widest text-white/50 hover:text-white uppercase transition-colors relative group"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + i * 0.07, duration: 0.5 }}
+              whileHover={{ color: "rgba(255,255,255,1)" }}
+              className="px-4 py-2 font-bebas text-sm tracking-widest text-white/50 uppercase relative group"
             >
               {item.label}
-              <span className="absolute bottom-0 left-4 right-4 h-px bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-            </button>
+              <span className="absolute bottom-0 left-4 right-4 h-px bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-250 origin-left" />
+            </motion.button>
           ))}
         </nav>
 
@@ -73,7 +102,7 @@ export function SiteHeader() {
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>

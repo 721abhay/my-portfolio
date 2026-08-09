@@ -1,0 +1,269 @@
+{
+  "hero": {
+    "title": "PORTFOLIO ",
+    "role": "FULL STACK / MOBILE",
+    "subRoles": [
+      "FULL STACK DEVELOPMENT",
+      "MOBILE APP CREATION",
+      "AI INTEGRATION & CLOUD"
+    ],
+    "quote": "I design & build digital experiences that are intuitive, beautiful and impactful.",
+    "socials": [
+      {
+        "platform": "github",
+        "url": "https://github.com/721abhay"
+      },
+      {
+        "platform": "linkedin",
+        "url": "https://linkedin.com/in/abhay-vishwakarma721"
+      },
+      {
+        "platform": "email",
+        "url": "mailto:abhayvishwakarma0814@gmail.com"
+      }
+    ],
+    "firstName": "ABHAY",
+    "lastName": "VISHWAKARMA",
+    "bioRole": "FULL STACK & MOBILE DEVELOPER",
+    "bioText": "I'm a digital developer crafting clean, modern and user-focused designs. I help brands communicate, engage and grow through thoughtful design solutions.",
+    "stats": [
+      {
+        "value": "2+",
+        "label": "Years Exp"
+      },
+      {
+        "value": "5+",
+        "label": "Projects"
+      },
+      {
+        "value": "7.33",
+        "label": "CGPA"
+      }
+    ]
+  },
+  "services": [
+    {
+      "icon": "Code2",
+      "title": "WEB DEVELOPMENT",
+      "desc": "Building scalable, high-performance web applications with React & Next.js."
+    },
+    {
+      "icon": "Smartphone",
+      "title": "MOBILE APPS",
+      "desc": "Cross-platform mobile experiences with Kotlin & Flutter that feel native on every device."
+    },
+    {
+      "icon": "Brain",
+      "title": "AI INTEGRATION",
+      "desc": "Integrating LLMs and AI tools to create intelligent, automated features."
+    },
+    {
+      "icon": "Database",
+      "title": "DATABASE DESIGN",
+      "desc": "Designing robust data schemas and managing databases for scalable backends."
+    },
+    {
+      "icon": "Layers",
+      "title": "SYSTEM ARCHITECTURE",
+      "desc": "Planning complete system architectures from backend APIs to cloud deployments."
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "AI-POWERED JOB APPLICATION SYSTEM",
+      "cat": "FULL STACK",
+      "desc": "Automated job application platform with AI form filling.",
+      "longDesc": "A comprehensive automation platform that streamlines the job application process. Features include intelligent form detection, AI-powered question answering, session management, and real-time application tracking.",
+      "tags": [
+        "React",
+        "Node.js",
+        "Playwright",
+        "AI"
+      ],
+      "github": "https://github.com/721abhay/autoapply",
+      "demo": "https://autoapply-demo.vercel.app",
+      "image": "/images/finance-dashboard-dark-ui.jpg"
+    },
+    {
+      "id": "2",
+      "title": "HAND TRACKING RHYTHM GAME",
+      "cat": "AI / ML",
+      "desc": "Interactive rhythm game using computer vision and MediaPipe.",
+      "longDesc": "An innovative browser-based game that uses MediaPipe hand tracking to create an immersive rhythm game experience. Players use hand gestures to hit targets in sync with music.",
+      "tags": [
+        "JavaScript",
+        "MediaPipe",
+        "WebGL"
+      ],
+      "github": "https://github.com/721abhay/hand-tracking-game",
+      "demo": "https://hand-game.vercel.app",
+      "image": "/images/abstract-3d-web-design.jpg"
+    },
+    {
+      "id": "3",
+      "title": "COIN CIRCLE — EXPENSE TRACKER",
+      "cat": "FULL STACK",
+      "desc": "Modern expense tracking app with analytics and charts.",
+      "longDesc": "A comprehensive personal finance management tool that helps users track expenses, set budgets, and visualize spending patterns with charts and insights.",
+      "tags": [
+        "React",
+        "Firebase",
+        "Chart.js"
+      ],
+      "github": "https://github.com/721abhay/coin-circle",
+      "demo": "https://coin-circle.vercel.app",
+      "image": "/images/clean-ecommerce-ui.jpg"
+    },
+    {
+      "id": "4",
+      "title": "DATABASE BACKUP UTILITY",
+      "cat": "OPEN SOURCE",
+      "desc": "Automated DB backup system with scheduling & S3 cloud storage.",
+      "longDesc": "A robust backup solution for MongoDB and PostgreSQL databases with automated scheduling, compression, and cloud storage support.",
+      "tags": [
+        "Python",
+        "MongoDB",
+        "PostgreSQL",
+        "AWS S3"
+      ],
+      "github": "https://github.com/721abhay/db-backup-utility",
+      "demo": "",
+      "image": "/images/minimalist-productivity-app.jpg"
+    },
+    {
+      "id": "5",
+      "title": "NEW PROJECT",
+      "cat": "FULL STACK",
+      "desc": "Short description.",
+      "longDesc": "Detailed description.",
+      "tags": [
+        "React"
+      ],
+      "github": "",
+      "demo": "",
+      "image": "/images/minimalist-productivity-app.jpg"
+    }
+  ],
+  "skills": [
+    {
+      "title": "Frontend Development",
+      "icon": "Layout",
+      "skills": [
+        "React.js",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "Tailwind CSS",
+        "HTML5/CSS3"
+      ]
+    },
+    {
+      "title": "Backend & Systems",
+      "icon": "Server",
+      "skills": [
+        "Node.js",
+        "Express.js",
+        "REST APIs",
+        "GraphQL",
+        "Python",
+        "C/C++"
+      ]
+    },
+    {
+      "title": "Mobile Development",
+      "icon": "Smartphone",
+      "skills": [
+        "Kotlin",
+        "Android SDK",
+        "Flutter",
+        "React Native",
+        "Jetpack Compose"
+      ]
+    },
+    {
+      "title": "Databases & Cloud",
+      "icon": "Database",
+      "skills": [
+        "MySQL",
+        "PostgreSQL",
+        "MongoDB",
+        "Firebase",
+        "Supabase",
+        "AWS S3"
+      ]
+    },
+    {
+      "title": "AI & Tools",
+      "icon": "Cpu",
+      "skills": [
+        "Git / GitHub",
+        "VS Code",
+        "MediaPipe",
+        "Playwright",
+        "Docker",
+        "Figma"
+      ]
+    }
+  ],
+  "about": {
+    "bioParagraphs": [
+      "I'm a Full Stack & Mobile Developer with a passion for building production-ready applications from concept to deployment. Experienced in developing fully functional mobile apps and web platforms using modern frameworks and AI-powered tools.",
+      "Focused on creating scalable, deployable solutions — not just prototypes. I believe great software is built at the intersection of clean code and thoughtful user experience."
+    ],
+    "traits": [
+      "Detail oriented — every pixel and function matters",
+      "Problem solver — analytical approach to every challenge",
+      "Fast learner — always upskilling with new tech",
+      "Collaborative — love working with teams to ship great products"
+    ],
+    "stats": [
+      {
+        "value": "2+",
+        "label": "Years Exp"
+      },
+      {
+        "value": "5+",
+        "label": "Projects"
+      },
+      {
+        "value": "7.33",
+        "label": "CGPA"
+      }
+    ],
+    "tools": [
+      {
+        "name": "React",
+        "icon": "https://cdn.simpleicons.org/react/61DAFB"
+      },
+      {
+        "name": "Next.js",
+        "icon": "https://cdn.simpleicons.org/nextdotjs/ffffff"
+      },
+      {
+        "name": "Kotlin",
+        "icon": "https://cdn.simpleicons.org/kotlin/7F52FF"
+      },
+      {
+        "name": "Python",
+        "icon": "https://cdn.simpleicons.org/python/3776AB"
+      },
+      {
+        "name": "Firebase",
+        "icon": "https://cdn.simpleicons.org/firebase/FFCA28"
+      },
+      {
+        "name": "GitHub",
+        "icon": "https://cdn.simpleicons.org/github/ffffff"
+      },
+      {
+        "name": "Node.js",
+        "icon": "https://cdn.simpleicons.org/nodedotjs/339933"
+      },
+      {
+        "name": "MongoDB",
+        "icon": "https://cdn.simpleicons.org/mongodb/47A248"
+      }
+    ]
+  }
+}

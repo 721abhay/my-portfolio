@@ -5,6 +5,8 @@ import { Analytics } from "@vercel/analytics/react"
 import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { PortfolioDataProvider } from "@/lib/portfolio-provider"
+import { AdminPanel } from "@/components/admin-panel"
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
@@ -66,7 +68,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <body className={`font-sans antialiased ${geist.variable} ${geistMono.variable} ${bebasNeue.variable} selection:bg-red-700 selection:text-white`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
+          <PortfolioDataProvider>
+            {children}
+            <AdminPanel />
+          </PortfolioDataProvider>
           <Analytics />
           <Toaster />
         </ThemeProvider>
