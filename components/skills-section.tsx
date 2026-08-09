@@ -1,140 +1,102 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { ScrollReveal } from "@/components/scroll-reveal"
-import { Code2, Database, Smartphone, Brain, Server, Palette, Sparkles, Cpu, Layers } from "lucide-react"
-import { PremiumCard } from "@/components/premium-card"
+import { Code2, Smartphone, Database, Terminal, Cpu, Layout, Server, Sparkles } from "lucide-react"
 
-const skillCategories = [
+const SKILL_GROUPS = [
   {
     title: "Frontend Development",
-    icon: Code2,
-    gradient: "from-blue-500 to-cyan-500",
-    glow: "accent",
-    skills: [
-      { name: "React / Next.js", level: 90 },
-      { name: "JavaScript (ES6+)", level: 95 },
-      { name: "HTML5 / CSS3", level: 98 },
-      { name: "Tailwind CSS", level: 95 },
-    ],
+    icon: Layout,
+    skills: ["React.js", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "HTML5/CSS3"],
   },
   {
-    title: "Languages & Backend",
+    title: "Backend & Systems",
     icon: Server,
-    gradient: "from-emerald-500 to-green-500",
-    glow: "emerald",
-    skills: [
-      { name: "Python", level: 90 },
-      { name: "Java", level: 85 },
-      { name: "C / C++", level: 80 },
-      { name: "Node.js", level: 85 },
-    ],
+    skills: ["Node.js", "Express.js", "REST APIs", "GraphQL", "Python", "C/C++"],
   },
   {
     title: "Mobile Development",
     icon: Smartphone,
-    gradient: "from-violet-500 to-purple-500",
-    glow: "primary",
-    skills: [
-      { name: "Kotlin", level: 90 },
-      { name: "Android SDK", level: 85 },
-      { name: "React Native", level: 80 },
-      { name: "Flutter", level: 75 },
-    ],
+    skills: ["Kotlin", "Android SDK", "Flutter", "React Native", "Jetpack Compose"],
   },
   {
-    title: "Cloud & Databases",
+    title: "Databases & Cloud",
     icon: Database,
-    gradient: "from-amber-500 to-orange-500",
-    glow: "gold",
-    skills: [
-      { name: "Firebase", level: 95 },
-      { name: "Supabase", level: 90 },
-      { name: "Microsoft Azure", level: 80 },
-      { name: "AWS", level: 75 },
-    ],
+    skills: ["MySQL", "PostgreSQL", "MongoDB", "Firebase", "Supabase", "AWS S3"],
   },
   {
-    title: "Tools & DevOps",
-    icon: Layers,
-    gradient: "from-rose-500 to-pink-500",
-    glow: "rose",
-    skills: [
-      { name: "Git / GitHub", level: 95 },
-      { name: "JIRA / Agile", level: 90 },
-      { name: "Unix / Linux", level: 85 },
-      { name: "CI/CD Pipelines", level: 80 },
-    ],
-  },
-  {
-    title: "Professional Attributes",
-    icon: Brain,
-    gradient: "from-cyan-400 to-blue-500",
-    glow: "accent",
-    skills: [
-      { name: "Problem Solving", level: 98 },
-      { name: "Team Collaboration", level: 95 },
-      { name: "Communication", level: 90 },
-      { name: "Adaptability", level: 95 },
-    ],
+    title: "AI & Tools",
+    icon: Cpu,
+    skills: ["Git / GitHub", "VS Code", "MediaPipe", "Playwright", "Docker", "Figma"],
   },
 ]
 
 export function SkillsSection() {
   return (
-    <section id="skills" className="bg-background border-t border-border/30">
-      {/* Section Header */}
-      <div className="px-6 md:px-12 py-12 border-b border-border/30">
-        <ScrollReveal>
-          <p className="font-bebas text-xs tracking-[0.3em] text-primary mb-2 uppercase">Expertise</p>
-          <h2 className="font-bebas text-5xl md:text-7xl tracking-tight text-foreground">
-            TECHNICAL <span className="text-primary">ARSENAL</span>
-          </h2>
-        </ScrollReveal>
+    <section id="skills" className="bg-[#080808] border-t border-white/[0.06]">
+      {/* Header */}
+      <div className="px-6 md:px-14 py-10 border-b border-white/[0.06]">
+        <p className="font-bebas text-[9px] tracking-[0.4em] text-red-600 uppercase mb-1">Capabilities</p>
+        <h2 className="font-bebas text-5xl md:text-7xl tracking-tight text-white leading-none">
+          TECHNICAL <span className="text-red-600">ARSENAL</span>
+        </h2>
       </div>
 
-      <div className="px-6 md:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {skillCategories.map((category, categoryIndex) => {
-          const Icon = category.icon
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y lg:divide-y-0 md:divide-x divide-white/[0.06]">
+        {SKILL_GROUPS.map((group, i) => {
+          const Icon = group.icon
           return (
-            <ScrollReveal key={categoryIndex} delay={categoryIndex * 0.1}>
-              <PremiumCard glowColor={category.glow} className="h-full">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className={`p-4 rounded-2xl bg-gradient-to-br ${category.gradient} shadow-lg shimmer-element relative overflow-hidden group-hover:scale-110 transition-transform duration-500`}>
-                    <div className="absolute inset-0 bg-white/20 animate-[shimmer_2s_infinite] border-t-2 border-white/20" />
-                    <Icon className="h-6 w-6 text-white relative z-10" />
+            <div
+              key={group.title}
+              className={`p-8 border-b border-white/[0.06] flex flex-col justify-between hover:bg-white/[0.01] transition-colors ${
+                i >= 3 ? "lg:border-t lg:border-white/[0.06]" : ""
+              }`}
+            >
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 border border-white/10 flex items-center justify-center">
+                    <Icon className="w-4 h-4 text-red-500" />
                   </div>
-                  <h3 className="text-2xl font-bold">{category.title}</h3>
+                  <h3 className="font-bebas text-xl tracking-wide text-white uppercase">{group.title}</h3>
                 </div>
 
-                <div className="space-y-6">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="font-medium text-foreground/90">{skill.name}</span>
-                        <span className="font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ color: `var(--${category.glow})` }}>{skill.level}%</span>
-                      </div>
-
-                      {/* Liquid Progress Bar */}
-                      <div className="h-2 bg-secondary/50 rounded-full overflow-hidden backdrop-blur-sm border border-white/5">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          transition={{ duration: 1.5, delay: categoryIndex * 0.1 + skillIndex * 0.1, ease: "circOut" }}
-                          className={`h-full relative`}
-                        >
-                          <div className={`absolute inset-0 bg-gradient-to-r ${category.gradient}`} />
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent w-[30%] animate-[shimmer_2s_infinite]" />
-                        </motion.div>
-                      </div>
-                    </div>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="font-bebas text-xs tracking-wider text-white/60 bg-[#0c0c0c] border border-white/10 px-3 py-1.5 hover:border-red-600/50 hover:text-white transition-colors"
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
-              </PremiumCard>
-            </ScrollReveal>
+              </div>
+
+              <div className="pt-6 mt-6 border-t border-white/[0.04] flex items-center justify-between text-[10px] font-bebas tracking-widest text-white/20">
+                <span>MODULE 0{i + 1}</span>
+                <span className="text-red-600">PRODUCTION READY</span>
+              </div>
+            </div>
           )
         })}
+
+        {/* 6th Box — Summary statement */}
+        <div className="p-8 border-b border-white/[0.06] flex flex-col justify-between bg-red-950/[0.05]">
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 border border-red-600/40 flex items-center justify-center">
+                <Sparkles className="w-4 h-4 text-red-500" />
+              </div>
+              <h3 className="font-bebas text-xl tracking-wide text-white uppercase">Continuous Growth</h3>
+            </div>
+            <p className="text-xs text-white/40 leading-relaxed font-sans">
+              Always expanding expertise into emerging AI frameworks, low-level optimization, and cloud architecture to deliver cutting-edge software solutions.
+            </p>
+          </div>
+          <div className="pt-6 mt-6 border-t border-white/[0.04] flex items-center justify-between text-[10px] font-bebas tracking-widest text-white/20">
+            <span>ALWAYS LEARNING</span>
+            <span className="text-red-600">2025</span>
+          </div>
         </div>
       </div>
     </section>

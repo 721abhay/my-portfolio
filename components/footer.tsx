@@ -1,36 +1,38 @@
 "use client"
 
 import Link from "next/link"
-import { Github, Linkedin, Mail, Phone, ArrowUpRight } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react"
 
 export function Footer() {
+  const scrollTo = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
+
   return (
-    <footer className="relative bg-background border-t border-border/30 overflow-hidden">
-      {/* Top section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 border-b border-border/30">
-        {/* Left — Branding */}
-        <div className="px-6 md:px-12 py-10 border-b md:border-b-0 md:border-r border-border/30">
-          <Link href="/" className="block mb-4">
-            <span className="font-bebas text-4xl tracking-tight">
-              ABHAY<span className="text-primary">DEV</span>
+    <footer className="relative bg-[#080808] border-t border-white/[0.06] overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 border-b border-white/[0.06]">
+        {/* Left Column */}
+        <div className="px-6 md:px-14 py-12 border-b md:border-b-0 md:border-r border-white/[0.06]">
+          <Link href="/" className="inline-block mb-4">
+            <span className="font-bebas text-3xl tracking-wider text-white">
+              ABHAY<span className="text-red-600">DEV</span>
             </span>
           </Link>
-          <p className="text-sm text-muted-foreground max-w-xs leading-relaxed">
-            Crafting digital experiences specifically designed to leave a lasting impression. Full stack developer based in Hyderabad, India.
+          <p className="text-sm text-white/35 max-w-xs leading-relaxed font-sans mb-6">
+            Crafting digital experiences designed to leave a lasting impression. Full stack developer based in Hyderabad, India.
           </p>
-          <div className="flex gap-3 mt-6">
+
+          <div className="flex gap-3">
             {[
               { Icon: Github, href: "https://github.com/721abhay", label: "GitHub" },
-              { Icon: Linkedin, href: "https://www.linkedin.com/in/abhay-vishwakarma721", label: "LinkedIn" },
+              { Icon: Linkedin, href: "https://linkedin.com/in/abhay-vishwakarma721", label: "LinkedIn" },
               { Icon: Mail, href: "mailto:abhayvishwakarma0814@gmail.com", label: "Email" },
-            ].map(({ Icon, href, label }, i) => (
+            ].map(({ Icon, href, label }) => (
               <a
-                key={i}
+                key={label}
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                 aria-label={label}
-                className="w-9 h-9 border border-border/50 flex items-center justify-center hover:border-primary hover:text-primary transition-all"
+                className="w-9 h-9 border border-white/10 flex items-center justify-center text-white/30 hover:border-red-600 hover:text-red-500 transition-all"
               >
                 <Icon className="w-4 h-4" />
               </a>
@@ -38,23 +40,24 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Right — Links grid */}
-        <div className="grid grid-cols-3 px-6 md:px-12 py-10 gap-8">
+        {/* Right Links Grid */}
+        <div className="grid grid-cols-3 px-6 md:px-14 py-12 gap-6">
           <div>
-            <h3 className="font-bebas tracking-widest text-sm text-foreground mb-4 uppercase">Navigate</h3>
+            <p className="font-bebas text-xs tracking-widest text-white mb-4 uppercase">Navigate</p>
             <ul className="space-y-2">
               {[
-                { label: "Projects", id: "projects-showcase" },
-                { label: "About", id: "about" },
-                { label: "Skills", id: "skills" },
-                { label: "Contact", id: "contact" },
-              ].map((item) => (
-                <li key={item.id}>
+                ["Projects", "projects"],
+                ["Services", "services"],
+                ["Skills", "skills"],
+                ["About", "about"],
+                ["Contact", "contact"],
+              ].map(([l, id]) => (
+                <li key={id}>
                   <button
-                    onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth" })}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors font-bebas tracking-wider"
+                    onClick={() => scrollTo(id)}
+                    className="font-bebas text-sm tracking-wider text-white/30 hover:text-red-400 transition-colors"
                   >
-                    {item.label}
+                    {l}
                   </button>
                 </li>
               ))}
@@ -62,34 +65,44 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-bebas tracking-widest text-sm text-foreground mb-4 uppercase">Contact</h3>
-            <ul className="space-y-2">
+            <p className="font-bebas text-xs tracking-widest text-white mb-4 uppercase">Contact</p>
+            <ul className="space-y-2 font-sans">
               <li>
-                <a href="mailto:abhayvishwakarma0814@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <a href="mailto:abhayvishwakarma0814@gmail.com" className="text-xs text-white/30 hover:text-red-400 transition-colors">
                   Email
                 </a>
               </li>
               <li>
-                <a href="tel:+916302745191" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <a href="tel:+916302745191" className="text-xs text-white/30 hover:text-red-400 transition-colors">
                   Phone
                 </a>
               </li>
               <li>
-                <span className="text-sm text-muted-foreground/50">Hyderabad, IN</span>
+                <span className="text-xs text-white/15">Hyderabad, IN</span>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-bebas tracking-widest text-sm text-foreground mb-4 uppercase">Links</h3>
-            <ul className="space-y-2">
+            <p className="font-bebas text-xs tracking-widest text-white mb-4 uppercase">Social</p>
+            <ul className="space-y-2 font-sans">
               <li>
-                <a href="https://github.com/721abhay" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+                <a
+                  href="https://github.com/721abhay"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-white/30 hover:text-red-400 transition-colors flex items-center gap-1"
+                >
                   GitHub <ArrowUpRight className="w-3 h-3" />
                 </a>
               </li>
               <li>
-                <a href="https://www.linkedin.com/in/abhay-vishwakarma721" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+                <a
+                  href="https://linkedin.com/in/abhay-vishwakarma721"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-white/30 hover:text-red-400 transition-colors flex items-center gap-1"
+                >
                   LinkedIn <ArrowUpRight className="w-3 h-3" />
                 </a>
               </li>
@@ -98,17 +111,10 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-12 py-4 gap-2 text-xs text-muted-foreground/60 font-bebas tracking-widest">
-        <p>© {new Date().getFullYear()} ABHAY VISHWAKARMA. BUILT WITH NEXT.JS</p>
-        <p>ALL RIGHTS RESERVED</p>
-      </div>
-
-      {/* Massive background text */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center overflow-hidden pointer-events-none opacity-[0.025] select-none">
-        <span className="font-bebas text-[15vw] leading-none tracking-tighter whitespace-nowrap text-foreground">
-          ABHAY VISHWAKARMA
-        </span>
+      {/* Copyright Bar */}
+      <div className="flex flex-col sm:flex-row items-center justify-between px-6 md:px-14 py-4 text-[10px] font-bebas tracking-widest text-white/20 uppercase gap-2">
+        <span>© {new Date().getFullYear()} Abhay Vishwakarma. Built with Next.js</span>
+        <span>All Rights Reserved</span>
       </div>
     </footer>
   )

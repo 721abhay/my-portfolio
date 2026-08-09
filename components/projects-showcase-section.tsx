@@ -1,470 +1,283 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import {
-    Github,
-    ExternalLink,
-    Play,
-    X,
-    Code2,
-    Sparkles,
-    Calendar,
-    Users,
-    Star
-} from "lucide-react"
-import { PremiumCard } from "@/components/premium-card"
-import { ScrollReveal } from "@/components/scroll-reveal"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Code2, Github, ExternalLink, X, ArrowUpRight } from "lucide-react"
 
-interface Project {
-    id: string
-    title: string
-    category: "Web App" | "Mobile App" | "Full Stack" | "AI/ML" | "Open Source"
-    description: string
-    longDescription: string
-    tags: string[]
-    image?: string
-    video?: string
-    thumbnail?: string
-    github?: string
-    demo?: string
-    date: string
-    team?: string
-    stars?: number
-    featured?: boolean
-    highlights?: string[]
-}
-
-const projects: Project[] = [
-    {
-        id: "1",
-        title: "AI-Powered Job Application System",
-        category: "Full Stack",
-        description: "Automated job application system with AI-powered form filling and LinkedIn integration.",
-        longDescription: "A comprehensive automation platform that streamlines the job application process. Features include intelligent form detection, AI-powered question answering, session management, and real-time application tracking.",
-        tags: ["React", "Node.js", "Playwright", "AI", "TypeScript"],
-        // video: "/projects/autoapply-demo.mp4", // Add your video here
-        thumbnail: "/placeholder.jpg", // Replace: /projects/autoapply-thumb.png
-        github: "https://github.com/721abhay/autoapply",
-        demo: "https://autoapply-demo.vercel.app",
-        date: "December 2024",
-        featured: true,
-        highlights: [
-            "AI-powered form filling",
-            "LinkedIn Easy Apply automation",
-            "Real-time tracking dashboard",
-            "Session persistence"
-        ]
-    },
-    {
-        id: "2",
-        title: "Hand Tracking Rhythm Game",
-        category: "AI/ML",
-        description: "Interactive rhythm game using computer vision and hand tracking technology.",
-        longDescription: "An innovative browser-based game that uses MediaPipe hand tracking to create an immersive rhythm game experience. Players use hand gestures to hit targets in sync with music.",
-        tags: ["JavaScript", "MediaPipe", "WebGL", "Computer Vision"],
-        image: "/placeholder.jpg", // Replace: /projects/hand-game.png
-        // video: "/projects/hand-game-demo.mp4", // Add your video
-        thumbnail: "/placeholder.jpg", // Replace: /projects/hand-game-thumb.png
-        github: "https://github.com/721abhay/hand-tracking-game",
-        demo: "https://hand-game.vercel.app",
-        date: "December 2024",
-        stars: 45,
-        featured: true,
-        highlights: [
-            "Real-time hand tracking",
-            "Dynamic difficulty system",
-            "Achievement system",
-            "Particle effects"
-        ]
-    },
-    {
-        id: "3",
-        title: "Coin Circle - Expense Tracker",
-        category: "Full Stack",
-        description: "Modern expense tracking application with analytics and budget management.",
-        longDescription: "A comprehensive personal finance management tool that helps users track expenses, set budgets, and visualize spending patterns with beautiful charts and insights.",
-        tags: ["React", "Firebase", "Chart.js", "Tailwind CSS"],
-        image: "/placeholder.jpg", // Replace: /projects/coin-circle.png
-        github: "https://github.com/721abhay/coin-circle",
-        demo: "https://coin-circle.vercel.app",
-        date: "November 2024",
-        stars: 32,
-        highlights: [
-            "Real-time expense tracking",
-            "Budget analytics",
-            "Category management",
-            "Export to CSV"
-        ]
-    },
-    {
-        id: "4",
-        title: "Database Backup Utility",
-        category: "Open Source",
-        description: "Automated database backup system with scheduling and cloud storage integration.",
-        longDescription: "A robust backup solution for MongoDB and PostgreSQL databases with automated scheduling, compression, and cloud storage support.",
-        tags: ["Python", "MongoDB", "PostgreSQL", "AWS S3"],
-        image: "/placeholder.jpg", // Replace: /projects/db-backup.png
-        github: "https://github.com/721abhay/db-backup-utility",
-        date: "December 2024",
-        highlights: [
-            "Automated scheduling",
-            "Multiple database support",
-            "Cloud storage integration",
-            "Compression & encryption"
-        ]
-    },
-    // Add more projects here - see HOW_TO_ADD_CONTENT.md for instructions
+const PROJECTS = [
+  {
+    id: "1",
+    title: "AI-Powered Job Application System",
+    cat: "Full Stack",
+    desc: "Automated job application platform with AI-powered form filling and LinkedIn integration.",
+    longDesc: "A comprehensive automation platform that streamlines the job application process. Features include intelligent form detection, AI-powered question answering, session management, and real-time application tracking.",
+    tags: ["React", "Node.js", "Playwright", "AI", "TypeScript"],
+    github: "https://github.com/721abhay/autoapply",
+    demo: "https://autoapply-demo.vercel.app",
+    date: "DEC 2024",
+    featured: true,
+    highlights: ["AI-powered form filling", "LinkedIn Easy Apply automation", "Real-time tracking dashboard", "Session persistence"],
+  },
+  {
+    id: "2",
+    title: "Hand Tracking Rhythm Game",
+    cat: "AI/ML",
+    desc: "Interactive rhythm game using computer vision and real-time hand tracking technology.",
+    longDesc: "An innovative browser-based game that uses MediaPipe hand tracking to create an immersive rhythm game experience. Players use hand gestures to hit targets in sync with music.",
+    tags: ["JavaScript", "MediaPipe", "WebGL", "Computer Vision"],
+    github: "https://github.com/721abhay/hand-tracking-game",
+    demo: "https://hand-game.vercel.app",
+    date: "DEC 2024",
+    featured: true,
+    highlights: ["Real-time hand tracking", "Dynamic difficulty system", "Achievement system", "Particle effects"],
+  },
+  {
+    id: "3",
+    title: "Coin Circle — Expense Tracker",
+    cat: "Full Stack",
+    desc: "Modern expense tracking app with analytics, charts and smart budget management features.",
+    longDesc: "A comprehensive personal finance management tool that helps users track expenses, set budgets, and visualize spending patterns with charts and insights.",
+    tags: ["React", "Firebase", "Chart.js", "Tailwind CSS"],
+    github: "https://github.com/721abhay/coin-circle",
+    demo: "https://coin-circle.vercel.app",
+    date: "NOV 2024",
+    featured: false,
+    highlights: ["Real-time expense tracking", "Budget analytics", "Category management", "CSV export"],
+  },
+  {
+    id: "4",
+    title: "Database Backup Utility",
+    cat: "Open Source",
+    desc: "Automated database backup system with scheduling, compression and cloud storage integration.",
+    longDesc: "A robust backup solution for MongoDB and PostgreSQL databases with automated scheduling, compression, and cloud storage support.",
+    tags: ["Python", "MongoDB", "PostgreSQL", "AWS S3"],
+    github: "https://github.com/721abhay/db-backup-utility",
+    demo: "",
+    date: "DEC 2024",
+    featured: false,
+    highlights: ["Automated scheduling", "Multi-database support", "Cloud storage integration", "Compression & encryption"],
+  },
 ]
 
+const CATEGORIES = ["ALL", "Full Stack", "AI/ML", "Open Source"]
+
 export function ProjectsShowcaseSection() {
-    const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-    const [filter, setFilter] = useState<string>("all")
-    const [playingVideo, setPlayingVideo] = useState<string | null>(null)
+  const [activeCategory, setActiveCategory] = useState("ALL")
+  const [selectedProject, setSelectedProject] = useState<typeof PROJECTS[0] | null>(null)
 
-    const categories = ["all", ...Array.from(new Set(projects.map(p => p.category)))]
+  const filteredProjects = activeCategory === "ALL"
+    ? PROJECTS
+    : PROJECTS.filter(p => p.cat === activeCategory)
 
-    const filteredProjects = filter === "all"
-        ? projects
-        : projects.filter(p => p.category === filter)
+  return (
+    <section id="projects" className="bg-[#080808] border-t border-white/[0.06]">
+      {/* Section Header */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between px-6 md:px-14 py-10 border-b border-white/[0.06] gap-6">
+        <div>
+          <p className="font-bebas text-[9px] tracking-[0.4em] text-red-600 uppercase mb-1">Portfolio</p>
+          <h2 className="font-bebas text-5xl md:text-7xl tracking-tight text-white leading-none">
+            FEATURED <span className="text-red-600">WORK</span>
+          </h2>
+        </div>
 
-    return (
-        <section id="projects-showcase" className="relative bg-background border-t border-border/30 overflow-hidden">
-            {/* Section Header */}
-            <div className="px-6 md:px-12 py-12 border-b border-border/30">
-                <ScrollReveal>
-                    <div className="flex items-end justify-between">
-                        <div>
-                            <p className="font-bebas text-xs tracking-[0.3em] text-primary mb-2 uppercase">Work</p>
-                            <h2 className="font-bebas text-5xl md:text-7xl tracking-tight text-foreground">
-                                FEATURED <span className="text-primary">WORK</span>
-                            </h2>
-                        </div>
-                        <a
-                            href="https://github.com/721abhay"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hidden md:flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors font-bebas tracking-widest group"
-                        >
-                            View more projects <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
-                        </a>
-                    </div>
-                </ScrollReveal>
+        {/* Category Filters */}
+        <div className="flex flex-wrap gap-0 border border-white/[0.06]">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 font-bebas text-xs tracking-widest uppercase border-r last:border-r-0 border-white/[0.06] transition-colors ${
+                activeCategory === cat
+                  ? "bg-red-600 text-white"
+                  : "text-white/40 hover:text-white hover:bg-white/[0.02]"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Projects Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
+        {filteredProjects.map((project, i) => (
+          <div
+            key={project.id}
+            className={`group relative border-b border-white/[0.06] flex flex-col justify-between ${
+              i >= 2 ? "md:border-t md:border-white/[0.06]" : ""
+            }`}
+          >
+            {/* Visual Header / Cover Box */}
+            <div
+              onClick={() => setSelectedProject(project)}
+              className="relative h-52 bg-[#0c0c0c] border-b border-white/[0.06] cursor-pointer overflow-hidden flex items-center justify-center"
+            >
+              <Code2 className="w-14 h-14 text-white/[0.05] group-hover:text-red-600/20 group-hover:scale-110 transition-all duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-transparent to-transparent opacity-80" />
+              
+              {/* Badges */}
+              <div className="absolute top-4 left-4 flex gap-2">
+                <span className="font-bebas text-[9px] tracking-widest text-white/40 border border-white/10 px-2 py-0.5 uppercase bg-[#080808]/60">
+                  {project.cat}
+                </span>
+                {project.featured && (
+                  <span className="font-bebas text-[9px] tracking-widest text-red-500 border border-red-600/40 px-2 py-0.5 uppercase bg-red-950/20">
+                    Featured
+                  </span>
+                )}
+              </div>
+
+              <span className="absolute top-4 right-4 font-bebas text-[9px] tracking-widest text-white/30">
+                {project.date}
+              </span>
             </div>
 
-                {/* Category Filter */}
-                <ScrollReveal delay={0.1}>
-                    <div className="px-6 md:px-12 py-4 border-b border-border/30">
-                    <Tabs value={filter} onValueChange={setFilter}>
-                        <TabsList className="gap-0 h-auto p-0 bg-transparent">
-                            {categories.map((category) => (
-                                <TabsTrigger
-                                    key={category}
-                                    value={category}
-                                    className="capitalize font-bebas tracking-wider text-sm rounded-none border-r border-border/30 last:border-r-0 px-5 py-2 data-[state=active]:bg-primary data-[state=active]:text-white"
-                                >
-                                    {category}
-                                </TabsTrigger>
-                            ))}
-                        </TabsList>
-                    </Tabs>
-                    </div>
-                </ScrollReveal>
+            {/* Content Area */}
+            <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3
+                  onClick={() => setSelectedProject(project)}
+                  className="font-bebas text-2xl tracking-wide text-white group-hover:text-red-500 transition-colors cursor-pointer leading-tight mb-2"
+                >
+                  {project.title}
+                </h3>
+                <p className="text-xs text-white/40 leading-relaxed mb-6">
+                  {project.desc}
+                </p>
+              </div>
 
-                {/* Projects Grid */}
-                <div className="px-6 md:px-12 py-12">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {filteredProjects.map((project, index) => (
-                        <ScrollReveal key={project.id} delay={index * 0.1}>
-                            <PremiumCard className="group overflow-hidden h-full flex flex-col">
-                                {/* Project Media */}
-                                <div
-                                    className="relative h-64 mb-6 rounded-lg overflow-hidden bg-gradient-to-br from-secondary/20 to-secondary/5 cursor-pointer"
-                                    onClick={() => setSelectedProject(project)}
-                                >
-                                    {project.video ? (
-                                        <>
-                                            {/* Video Thumbnail */}
-                                            <Image
-                                                src={project.thumbnail || project.image || "/placeholder.jpg"}
-                                                alt={project.title}
-                                                fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                            />
-
-                                            {/* Play Button Overlay */}
-                                            <div className="absolute inset-0 bg-background/40 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                <motion.div
-                                                    whileHover={{ scale: 1.1 }}
-                                                    whileTap={{ scale: 0.95 }}
-                                                    className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center"
-                                                >
-                                                    <Play className="w-8 h-8 text-primary-foreground ml-1" />
-                                                </motion.div>
-                                            </div>
-                                        </>
-                                    ) : project.image ? (
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center">
-                                            <Code2 className="w-16 h-16 text-muted-foreground/20" />
-                                        </div>
-                                    )}
-
-                                    {/* Featured Badge */}
-                                    {project.featured && (
-                                        <div className="absolute top-3 left-3">
-                                            <Badge className="bg-primary/90 backdrop-blur-sm gap-1">
-                                                <Sparkles className="w-3 h-3" />
-                                                Featured
-                                            </Badge>
-                                        </div>
-                                    )}
-
-                                    {/* Category Badge */}
-                                    <div className="absolute top-3 right-3">
-                                        <Badge variant="secondary" className="backdrop-blur-sm">
-                                            {project.category}
-                                        </Badge>
-                                    </div>
-                                </div>
-
-                                {/* Project Info */}
-                                <div className="flex-1 flex flex-col space-y-4">
-                                    <div>
-                                        <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
-                                            {project.title}
-                                        </h3>
-                                        <p className="text-muted-foreground">
-                                            {project.description}
-                                        </p>
-                                    </div>
-
-                                    {/* Meta Info */}
-                                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                                        <div className="flex items-center gap-1">
-                                            <Calendar className="w-4 h-4" />
-                                            <span>{project.date}</span>
-                                        </div>
-                                        {project.stars && (
-                                            <div className="flex items-center gap-1">
-                                                <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                                                <span>{project.stars}</span>
-                                            </div>
-                                        )}
-                                        {project.team && (
-                                            <div className="flex items-center gap-1">
-                                                <Users className="w-4 h-4" />
-                                                <span>{project.team}</span>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Tags */}
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.tags.map((tag) => (
-                                            <Badge key={tag} variant="outline" className="text-xs">
-                                                {tag}
-                                            </Badge>
-                                        ))}
-                                    </div>
-
-                                    {/* Action Buttons */}
-                                    <div className="flex gap-3 pt-4 mt-auto">
-                                        {project.github && (
-                                            <Button variant="outline" size="sm" asChild className="gap-2">
-                                                <a href={project.github} target="_blank" rel="noopener noreferrer">
-                                                    <Github className="w-4 h-4" />
-                                                    Code
-                                                </a>
-                                            </Button>
-                                        )}
-                                        {project.demo && (
-                                            <Button size="sm" asChild className="gap-2">
-                                                <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                                                    <ExternalLink className="w-4 h-4" />
-                                                    Live Demo
-                                                </a>
-                                            </Button>
-                                        )}
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            onClick={() => setSelectedProject(project)}
-                                            className="gap-2 ml-auto"
-                                        >
-                                            View Details
-                                        </Button>
-                                    </div>
-                                </div>
-                            </PremiumCard>
-                        </ScrollReveal>
-                    ))}
-                </div>
+              <div>
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  {project.tags.map((t) => (
+                    <span key={t} className="font-bebas text-[9px] tracking-wider text-white/30 border border-white/[0.08] px-2 py-0.5">
+                      {t}
+                    </span>
+                  ))}
                 </div>
 
-                {/* Project Detail Modal */}
-                <AnimatePresence>
-                    {selectedProject && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md"
-                            onClick={() => {
-                                setSelectedProject(null)
-                                setPlayingVideo(null)
-                            }}
-                        >
-                            <motion.div
-                                initial={{ scale: 0.9, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                exit={{ scale: 0.9, opacity: 0 }}
-                                transition={{ type: "spring", damping: 25 }}
-                                className="relative max-w-5xl w-full max-h-[90vh] overflow-auto"
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                <PremiumCard className="p-8">
-                                    {/* Close Button */}
-                                    <button
-                                        onClick={() => {
-                                            setSelectedProject(null)
-                                            setPlayingVideo(null)
-                                        }}
-                                        className="absolute top-4 right-4 p-2 rounded-full bg-background/50 hover:bg-background transition-colors z-10"
-                                    >
-                                        <X className="w-5 h-5" />
-                                    </button>
-
-                                    {/* Project Media */}
-                                    <div className="relative h-96 mb-6 rounded-lg overflow-hidden">
-                                        {selectedProject.video && playingVideo === selectedProject.id ? (
-                                            <video
-                                                src={selectedProject.video}
-                                                controls
-                                                autoPlay
-                                                className="w-full h-full object-contain"
-                                            />
-                                        ) : (
-                                            <>
-                                                <Image
-                                                    src={selectedProject.thumbnail || selectedProject.image || "/placeholder.jpg"}
-                                                    alt={selectedProject.title}
-                                                    fill
-                                                    className="object-cover"
-                                                />
-                                                {selectedProject.video && (
-                                                    <div className="absolute inset-0 bg-background/40 backdrop-blur-sm flex items-center justify-center">
-                                                        <Button
-                                                            size="lg"
-                                                            onClick={() => setPlayingVideo(selectedProject.id)}
-                                                            className="gap-2"
-                                                        >
-                                                            <Play className="w-5 h-5" />
-                                                            Play Demo Video
-                                                        </Button>
-                                                    </div>
-                                                )}
-                                            </>
-                                        )}
-                                    </div>
-
-                                    {/* Project Details */}
-                                    <div className="space-y-6">
-                                        <div>
-                                            <div className="flex items-start justify-between mb-4">
-                                                <div>
-                                                    <h2 className="text-3xl font-bold mb-2">{selectedProject.title}</h2>
-                                                    <Badge variant="secondary">{selectedProject.category}</Badge>
-                                                </div>
-                                            </div>
-
-                                            <p className="text-lg text-muted-foreground">
-                                                {selectedProject.longDescription}
-                                            </p>
-                                        </div>
-
-                                        {/* Highlights */}
-                                        {selectedProject.highlights && selectedProject.highlights.length > 0 && (
-                                            <div>
-                                                <h3 className="text-xl font-semibold mb-3">Key Features</h3>
-                                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                                    {selectedProject.highlights.map((highlight, i) => (
-                                                        <li key={i} className="flex items-center gap-2 text-muted-foreground">
-                                                            <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
-                                                            <span>{highlight}</span>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-                                        )}
-
-                                        {/* Technologies */}
-                                        <div>
-                                            <h3 className="text-xl font-semibold mb-3">Technologies Used</h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {selectedProject.tags.map((tag) => (
-                                                    <Badge key={tag} variant="outline">
-                                                        {tag}
-                                                    </Badge>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        {/* Meta Info */}
-                                        <div className="flex items-center gap-6 text-muted-foreground">
-                                            <div className="flex items-center gap-2">
-                                                <Calendar className="w-5 h-5" />
-                                                <span>{selectedProject.date}</span>
-                                            </div>
-                                            {selectedProject.stars && (
-                                                <div className="flex items-center gap-2">
-                                                    <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" />
-                                                    <span>{selectedProject.stars} stars</span>
-                                                </div>
-                                            )}
-                                            {selectedProject.team && (
-                                                <div className="flex items-center gap-2">
-                                                    <Users className="w-5 h-5" />
-                                                    <span>{selectedProject.team}</span>
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        {/* Action Buttons */}
-                                        <div className="flex gap-4 pt-4">
-                                            {selectedProject.github && (
-                                                <Button asChild className="gap-2">
-                                                    <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
-                                                        <Github className="w-4 h-4" />
-                                                        View on GitHub
-                                                    </a>
-                                                </Button>
-                                            )}
-                                            {selectedProject.demo && (
-                                                <Button variant="outline" asChild className="gap-2">
-                                                    <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer">
-                                                        <ExternalLink className="w-4 h-4" />
-                                                        Live Demo
-                                                    </a>
-                                                </Button>
-                                            )}
-                                        </div>
-                                    </div>
-                                </PremiumCard>
-                            </motion.div>
-                        </motion.div>
+                {/* Links */}
+                <div className="flex items-center justify-between pt-4 border-t border-white/[0.06]">
+                  <div className="flex items-center gap-3">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 font-bebas text-xs tracking-widest text-white/40 hover:text-white transition-colors border border-white/10 hover:border-white/30 px-3 py-1.5"
+                      >
+                        <Github className="w-3.5 h-3.5" /> CODE
+                      </a>
                     )}
-                </AnimatePresence>
-        </section>
-    )
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 font-bebas text-xs tracking-widest text-white bg-red-600 hover:bg-red-700 transition-colors px-3 py-1.5"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" /> LIVE
+                      </a>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => setSelectedProject(project)}
+                    className="font-bebas text-xs tracking-widest text-white/40 hover:text-red-500 transition-colors flex items-center gap-1"
+                  >
+                    DETAILS <ArrowUpRight className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Project Details Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative max-w-2xl w-full bg-[#0c0c0c] border border-white/10 p-8 max-h-[85vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-6 right-6 text-white/40 hover:text-white transition-colors p-1"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <span className="font-bebas text-[10px] tracking-widest text-red-600 uppercase border border-red-600/30 px-2 py-0.5">
+                {selectedProject.cat}
+              </span>
+
+              <h3 className="font-bebas text-3xl md:text-4xl text-white mt-3 mb-4 leading-none">
+                {selectedProject.title}
+              </h3>
+
+              <p className="text-sm text-white/60 leading-relaxed mb-6">
+                {selectedProject.longDesc}
+              </p>
+
+              {selectedProject.highlights && (
+                <div className="mb-6">
+                  <p className="font-bebas text-xs tracking-widest text-white/40 mb-3 uppercase">Key Highlights</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {selectedProject.highlights.map((h) => (
+                      <div key={h} className="flex items-center gap-2 text-xs text-white/50">
+                        <span className="w-1 h-1 rounded-full bg-red-600 flex-shrink-0" />
+                        {h}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-1.5 mb-8">
+                {selectedProject.tags.map((t) => (
+                  <span key={t} className="font-bebas text-[10px] tracking-wider text-white/30 border border-white/10 px-2 py-1">
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-4 pt-4 border-t border-white/10">
+                {selectedProject.github && (
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-bebas tracking-widest text-xs text-white border border-white/20 hover:border-white px-5 py-2.5 transition-colors"
+                  >
+                    <Github className="w-4 h-4" /> VIEW CODE
+                  </a>
+                )}
+                {selectedProject.demo && (
+                  <a
+                    href={selectedProject.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 font-bebas tracking-widest text-xs text-white bg-red-600 hover:bg-red-700 px-5 py-2.5 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" /> LIVE DEMO
+                  </a>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  )
 }
