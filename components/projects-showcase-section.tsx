@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { Code2, Github, ExternalLink, X, ArrowUpRight } from "lucide-react"
 
@@ -14,6 +15,7 @@ const PROJECTS = [
     tags: ["React", "Node.js", "Playwright", "AI"],
     github: "https://github.com/721abhay/autoapply",
     demo: "https://autoapply-demo.vercel.app",
+    image: "/images/finance-dashboard-dark-ui.jpg"
   },
   {
     id: "2",
@@ -24,6 +26,7 @@ const PROJECTS = [
     tags: ["JavaScript", "MediaPipe", "WebGL"],
     github: "https://github.com/721abhay/hand-tracking-game",
     demo: "https://hand-game.vercel.app",
+    image: "/images/abstract-3d-web-design.jpg"
   },
   {
     id: "3",
@@ -34,6 +37,7 @@ const PROJECTS = [
     tags: ["React", "Firebase", "Chart.js"],
     github: "https://github.com/721abhay/coin-circle",
     demo: "https://coin-circle.vercel.app",
+    image: "/images/clean-ecommerce-ui.jpg"
   },
   {
     id: "4",
@@ -44,6 +48,7 @@ const PROJECTS = [
     tags: ["Python", "MongoDB", "PostgreSQL", "AWS S3"],
     github: "https://github.com/721abhay/db-backup-utility",
     demo: "",
+    image: "/images/minimalist-productivity-app.jpg"
   },
 ]
 
@@ -73,25 +78,33 @@ export function ProjectsShowcaseSection() {
           <div
             key={p.id}
             onClick={() => setSelectedProject(p)}
-            className="bg-[#121010] border border-white/10 rounded-xl overflow-hidden hover:border-red-600/40 transition-all cursor-pointer group flex flex-col justify-between"
+            className="bg-[#121010] border border-white/10 rounded-xl overflow-hidden hover:border-red-600/40 transition-all cursor-pointer group flex flex-col justify-between h-full"
           >
-            {/* Visual Cover Box */}
-            <div className="relative h-40 bg-[#0c0c0c] border-b border-white/5 flex items-center justify-center overflow-hidden">
-              <Code2 className="w-12 h-12 text-white/5 group-hover:text-red-600/30 group-hover:scale-110 transition-all duration-500" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#121010] via-transparent to-transparent opacity-80" />
-              <span className="absolute top-3 left-3 font-bebas text-[9px] tracking-widest text-red-500 border border-red-600/30 px-2 py-0.5 rounded bg-red-950/20 uppercase">
+            {/* Visual Cover Box with Mockup Image */}
+            <div className="relative h-44 bg-[#0c0c0c] border-b border-white/5 overflow-hidden">
+              <Image
+                src={p.image}
+                alt={p.title}
+                fill
+                className="object-cover opacity-75 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#121010] via-[#121010]/40 to-transparent" />
+              
+              <span className="absolute top-3 left-3 font-bebas text-[9px] tracking-widest text-red-500 border border-red-600/30 px-2 py-0.5 rounded bg-[#121010]/80 uppercase z-10">
                 {p.cat}
               </span>
             </div>
 
             {/* Title & Desc */}
-            <div className="p-4 space-y-2">
-              <h3 className="font-bebas text-base tracking-wider text-[#f3e8df] group-hover:text-red-400 transition-colors leading-tight">
-                {p.title}
-              </h3>
-              <p className="text-xs text-white/40 leading-relaxed font-sans line-clamp-2">
-                {p.desc}
-              </p>
+            <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="font-bebas text-base tracking-wider text-[#f3e8df] group-hover:text-red-400 transition-colors leading-tight">
+                  {p.title}
+                </h3>
+                <p className="text-xs text-white/40 leading-relaxed font-sans line-clamp-2 mt-1">
+                  {p.desc}
+                </p>
+              </div>
             </div>
           </div>
         ))}
@@ -128,6 +141,15 @@ export function ProjectsShowcaseSection() {
               <h3 className="font-bebas text-2xl text-[#f3e8df] mt-2 mb-3 leading-tight">
                 {selectedProject.title}
               </h3>
+
+              <div className="relative h-48 w-full bg-[#0c0c0c] border border-white/10 rounded-lg overflow-hidden mb-4">
+                <Image
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
               <p className="text-xs text-white/60 font-sans leading-relaxed mb-4">
                 {selectedProject.longDesc}

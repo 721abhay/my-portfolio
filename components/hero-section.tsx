@@ -28,9 +28,9 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-bebas text-center leading-none tracking-normal"
+            className="font-bebas text-center leading-none tracking-[0.12em]"
             style={{
-              fontSize: "clamp(85px, 18.5vw, 270px)",
+              fontSize: "clamp(75px, 16vw, 240px)",
               color: "#ebd4c2",
               lineHeight: 0.85,
             }}
