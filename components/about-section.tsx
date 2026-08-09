@@ -2,6 +2,14 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { CheckCircle2 } from "lucide-react"
+
+const TRAITS = [
+  "Detail oriented — every pixel and function matters",
+  "Problem solver — analytical approach to every challenge",
+  "Fast learner — always upskilling with new tech",
+  "Collaborative — love working with teams to ship great products",
+]
 
 const TOOLS = [
   { name: "React", icon: "https://cdn.simpleicons.org/react/61DAFB" },
@@ -16,96 +24,91 @@ const TOOLS = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="bg-[#080808] border-t border-white/10 px-6 md:px-12 py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
-        {/* ── Left Column: ABOUT ME ── */}
-        <div className="lg:col-span-6 space-y-6">
-          <h2 className="font-bebas text-3xl md:text-4xl text-[#f3e8df] tracking-wide">
-            ABOUT <span className="text-red-600">ME</span>
-          </h2>
+    <section id="about" className="bg-[#080808] border-t border-white/10 scroll-mt-16">
+      
+      {/* ── 2-Column Main About Layout with Prominent Large Portrait ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 border-b border-white/10 min-h-[620px]">
 
-          <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 bg-[#121010] border border-white/10 rounded-xl p-6">
-            {/* Red Bordered Photo */}
-            <div className="sm:col-span-5 relative h-52 rounded-lg overflow-hidden border border-red-600/50">
-              <Image
-                src="/images/abhay-suit-transparent.png"
-                alt="Abhay Vishwakarma"
-                fill
-                className="object-cover object-top"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-red-950/40 via-transparent to-transparent pointer-events-none" />
-            </div>
+        {/* ── Left Column: Prominent Large Suit Photo ── */}
+        <div className="lg:col-span-6 relative bg-[#090909] min-h-[480px] lg:min-h-[650px] flex items-end justify-center border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden group">
+          {/* Ambient Red Glow behind photo */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[340px] rounded-full bg-red-950/40 blur-3xl pointer-events-none" />
 
-            {/* Bio & Checklist */}
-            <div className="sm:col-span-7 space-y-4 flex flex-col justify-between">
-              <p className="text-xs text-white/60 leading-relaxed font-sans">
-                I'm a Full Stack &amp; Mobile Developer with a passion for building clean, performant interfaces and seamless backends. I believe great software is not just about how it looks, but how it works.
-              </p>
-
-              <ul className="space-y-1.5 font-sans text-xs text-white/50">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 flex-shrink-0" />
-                  Detail oriented
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 flex-shrink-0" />
-                  Problem solver
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 flex-shrink-0" />
-                  Minimal &amp; modern
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 flex-shrink-0" />
-                  Always learning
-                </li>
-              </ul>
-            </div>
+          {/* Large Image Container */}
+          <div className="relative w-full h-full min-h-[480px] lg:min-h-[650px] flex items-end justify-center">
+            <Image
+              src="/images/abhay-suit-transparent.png"
+              alt="Abhay Vishwakarma"
+              fill
+              className="object-cover object-top scale-110 lg:scale-115 transition-transform duration-700 group-hover:scale-120"
+              priority
+            />
           </div>
         </div>
 
-        {/* ── Right Column: TOOLS I USE + Feedback ── */}
-        <div className="lg:col-span-6 space-y-6">
-          <h2 className="font-bebas text-3xl md:text-4xl text-[#f3e8df] tracking-wide">
-            TOOLS <span className="text-red-600">I USE</span>
-          </h2>
+        {/* ── Right Column: Bio + Red Checkmarks + Stats ── */}
+        <div className="lg:col-span-6 p-8 md:p-14 flex flex-col justify-between space-y-8 bg-[#080808]">
+          <div className="space-y-6">
+            <p className="text-base md:text-lg text-white/80 leading-relaxed font-sans font-light">
+              I'm a Full Stack &amp; Mobile Developer with a passion for building production-ready applications from concept to deployment. Experienced in developing fully functional mobile apps and web platforms using modern frameworks and AI-powered tools.
+            </p>
 
-          <div className="space-y-4">
-            {/* Tools Grid */}
-            <div className="bg-[#121010] border border-white/10 rounded-xl p-6 flex flex-wrap gap-4">
-              {TOOLS.map((t, i) => (
-                <motion.div
-                  key={i}
-                  whileHover={{ y: -3 }}
-                  className="flex flex-col items-center gap-1 group cursor-default"
-                >
-                  <div className="w-12 h-12 rounded-lg border border-white/10 bg-white/[0.02] group-hover:border-red-600/50 flex items-center justify-center p-2.5 transition-all">
-                    <img src={t.icon} alt={t.name} className="w-full h-full object-contain" />
-                  </div>
-                  <span className="font-bebas text-[9px] tracking-wider text-white/30 group-hover:text-red-500 uppercase transition-colors">
-                    {t.name}
-                  </span>
-                </motion.div>
+            <p className="text-base md:text-lg text-white/80 leading-relaxed font-sans font-light">
+              Focused on creating scalable, deployable solutions — not just prototypes. I believe great software is built at the intersection of clean code and thoughtful user experience.
+            </p>
+
+            {/* Red Checkmark Traits List */}
+            <div className="space-y-3.5 pt-3">
+              {TRAITS.map((trait) => (
+                <div key={trait} className="flex items-center gap-3 text-xs md:text-sm text-white/70 font-sans">
+                  <CheckCircle2 className="w-4 h-4 text-red-600 flex-shrink-0" />
+                  <span>{trait}</span>
+                </div>
               ))}
             </div>
+          </div>
 
-            {/* Testimonial / Feedback Quote box matching reference */}
-            <div className="bg-[#121010] border border-white/10 rounded-xl p-6 flex items-start gap-4">
-              <span className="font-serif text-3xl text-red-600 leading-none">“</span>
-              <div>
-                <p className="text-xs text-white/50 italic leading-relaxed font-sans">
-                  Abhay is an exceptional developer who delivers outstanding work on time and understands modern digital solutions like no one else.
-                </p>
-                <p className="font-bebas text-[10px] tracking-widest text-red-500 mt-2 uppercase">
-                  — Client Feedback
-                </p>
-              </div>
+          {/* Bottom Stats Row */}
+          <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/10">
+            <div>
+              <p className="font-bebas text-4xl md:text-5xl text-red-600 leading-none">2+</p>
+              <p className="text-[10px] text-white/40 uppercase tracking-widest font-bebas mt-1.5">Years Exp</p>
+            </div>
+            <div>
+              <p className="font-bebas text-4xl md:text-5xl text-red-600 leading-none">5+</p>
+              <p className="text-[10px] text-white/40 uppercase tracking-widest font-bebas mt-1.5">Projects</p>
+            </div>
+            <div>
+              <p className="font-bebas text-4xl md:text-5xl text-red-600 leading-none">7.33</p>
+              <p className="text-[10px] text-white/40 uppercase tracking-widest font-bebas mt-1.5">CGPA</p>
             </div>
           </div>
         </div>
 
       </div>
+
+      {/* ── Tools I Use Strip ── */}
+      <div className="px-6 md:px-14 py-8 bg-[#080808]">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex-shrink-0">
+            <p className="font-bebas text-[10px] tracking-[0.3em] text-red-600 uppercase mb-0.5">Stack</p>
+            <h3 className="font-bebas text-2xl md:text-3xl tracking-wide text-[#f3e8df]">TOOLS I USE</h3>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            {TOOLS.map((t, i) => (
+              <motion.div key={i} whileHover={{ y: -3 }} className="group flex flex-col items-center gap-1">
+                <div className="w-11 h-11 rounded-lg border border-white/10 group-hover:border-red-600/40 bg-white/[0.02] flex items-center justify-center p-2.5 transition-all">
+                  <img src={t.icon} alt={t.name} className="w-full h-full object-contain" />
+                </div>
+                <span className="font-bebas text-[9px] tracking-wider text-white/30 group-hover:text-red-500 transition-colors uppercase">
+                  {t.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
     </section>
   )
 }

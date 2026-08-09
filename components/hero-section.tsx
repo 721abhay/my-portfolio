@@ -99,13 +99,13 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="lg:col-span-5 relative flex justify-center items-end h-[380px] md:h-[460px]"
+            className="lg:col-span-5 relative flex justify-center items-end h-[440px] md:h-[520px]"
           >
             {/* Dark Red Circular Glow / Spotlight behind photo */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] md:w-[340px] md:h-[340px] rounded-full bg-gradient-to-tr from-red-950 via-red-900/40 to-transparent blur-2xl opacity-80 pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full bg-gradient-to-tr from-red-950 via-red-900/40 to-transparent blur-2xl opacity-80 pointer-events-none" />
 
             {/* Person Photo */}
-            <div className="relative w-[280px] md:w-[340px] h-full z-10">
+            <div className="relative w-[320px] md:w-[420px] h-full z-10">
               <Image
                 src="/images/abhay-suit-transparent.png"
                 alt="Abhay Vishwakarma"
