@@ -9,7 +9,7 @@ export function HeroSection() {
     <section id="hero" className="relative min-h-screen bg-[#080808] text-white flex flex-col justify-between overflow-hidden">
 
       {/* ── Top Bar ── */}
-      <div className="flex items-center justify-between px-6 md:px-12 pt-16 pb-3 border-b border-white/10 z-30 relative text-[10px] font-bebas tracking-[0.35em] text-white/40 uppercase">
+      <div className="flex items-center justify-between px-6 md:px-12 pt-16 pb-4 border-b border-white/10 z-30 relative text-[10px] font-bebas tracking-[0.35em] text-white/40 uppercase">
         <span>Creative Portfolio</span>
         <button
           onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
@@ -20,27 +20,27 @@ export function HeroSection() {
       </div>
 
       {/* ── Main Hero Composition Area ── */}
-      <div className="relative flex-1 flex flex-col justify-between pt-2 pb-6 z-20">
+      <div className="relative flex-1 flex flex-col justify-between pt-6 pb-8 z-20">
 
-        {/* ── Giant Edge-to-Edge PORTFOLIO Headline ── */}
-        <div className="relative z-10 text-center select-none overflow-hidden">
+        {/* ── Giant Edge-to-Edge PORTFOLIO Headline with Clean Top Space ── */}
+        <div className="relative z-10 text-center select-none overflow-hidden pt-4 pb-2">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-bebas text-center leading-none tracking-tighter"
+            className="font-bebas text-center leading-none tracking-normal"
             style={{
-              fontSize: "clamp(90px, 19.5vw, 290px)",
+              fontSize: "clamp(85px, 18.5vw, 270px)",
               color: "#ebd4c2",
-              lineHeight: 0.8,
+              lineHeight: 0.85,
             }}
           >
             PORTFOLIO
           </motion.h1>
         </div>
 
-        {/* ── Central Overlay Grid (Quote Left | Red Spotlight & Photo Center | Bio Right) ── */}
-        <div className="relative z-20 max-w-7xl mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6 items-end -mt-16 sm:-mt-24 md:-mt-32">
+        {/* ── Central Overlay Grid (Balanced Overlap matching Reference Image) ── */}
+        <div className="relative z-20 max-w-7xl mx-auto w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-6 items-end -mt-10 sm:-mt-14 md:-mt-16">
 
           {/* ── Left Column: Tags & Quote ── */}
           <motion.div
@@ -88,18 +88,18 @@ export function HeroSection() {
             </div>
           </motion.div>
 
-          {/* ── Center Column: Person Photo overlapping PORTFOLIO inside Red Circle Spotlight ── */}
+          {/* ── Center Column: Person Photo with Dark Crimson Circle Spotlight ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="lg:col-span-6 relative flex justify-center items-end h-[360px] md:h-[460px]"
+            className="lg:col-span-6 relative flex justify-center items-end h-[360px] md:h-[450px]"
           >
-            {/* Dark Crimson Circular Spotlight (Exact match to reference image) */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[380px] md:h-[380px] rounded-full bg-[#350707] border border-red-900/30 shadow-[0_0_80px_rgba(204,0,0,0.25)] pointer-events-none" />
+            {/* Dark Crimson Circular Spotlight (Overlapping only bottom ~20% of PORTFOLIO text) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] h-[260px] md:w-[360px] md:h-[360px] rounded-full bg-[#350707] border border-red-900/30 shadow-[0_0_80px_rgba(204,0,0,0.25)] pointer-events-none" />
 
-            {/* Suit Photo overlapping PORTFOLIO text */}
-            <div className="relative w-[300px] md:w-[400px] h-full z-10">
+            {/* Person Suit Photo */}
+            <div className="relative w-[300px] md:w-[390px] h-full z-10">
               <Image
                 src="/images/abhay-suit-transparent.png"
                 alt="Abhay Vishwakarma"
@@ -131,7 +131,7 @@ export function HeroSection() {
               I'm a digital developer crafting clean, modern and user-focused designs. I help brands communicate, engage and grow through thoughtful design solutions.
             </p>
 
-            {/* Icon Stats Row (Matching reference circles) */}
+            {/* Icon Stats Row */}
             <div className="grid grid-cols-3 gap-2 pt-3 border-t border-white/10 text-center">
               <div className="flex flex-col items-center">
                 <div className="w-7 h-7 rounded-full border border-white/15 flex items-center justify-center mb-1">
