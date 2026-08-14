@@ -100,7 +100,6 @@ export function Footer() {
             <ul className="space-y-2 font-sans">
               {[
                 { href: "mailto:abhayvishwakarma0814@gmail.com", label: "Email" },
-                { href: "tel:+916302745191", label: "Phone" },
               ].map(({ href, label }, i) => (
                 <motion.li
                   key={label}

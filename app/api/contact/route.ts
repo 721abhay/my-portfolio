@@ -19,15 +19,11 @@ export async function POST(req: Request) {
 
         // If credentials are not set, we'll log the message (Mock Mode)
         // This allows the frontend to be "functional" without blocking on env vars
-        if (!emailUser || !emailPass) {
+        if (!emailUser || !emailPass || emailUser.includes('your-email') || emailUser === '' || emailPass === '') {
             console.log('--- Mock Handling Email ---');
             console.log(`From: ${firstName} ${lastName} <${email}>`);
             console.log(`Message: ${message}`);
             console.log('---------------------------');
-
-            // In a real scenario, you'd fail here, but for "functionality" demo we might simulate success
-            // Or we can return a specific warning. 
-            // Let's return success so the UI updates, but log a warning on server.
 
             return NextResponse.json(
                 { message: 'Message received (Mock Mode: Configure EMAIL_USER/PASS)' },

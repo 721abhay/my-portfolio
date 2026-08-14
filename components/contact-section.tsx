@@ -47,9 +47,17 @@ export function ContactSection() {
         body: JSON.stringify(data),
       })
       if (!res.ok) throw new Error("Failed")
-      toast.success("Message sent successfully!", {
-        description: "I'll get back to you as soon as possible.",
-      })
+      const result = await res.json()
+      
+      if (result.message && result.message.includes("Mock Mode")) {
+        toast.warning("Message received (Mock Mode)", {
+          description: "Configure EMAIL_USER & EMAIL_PASS in env to send real emails.",
+        })
+      } else {
+        toast.success("Message sent successfully!", {
+          description: "I'll get back to you as soon as possible.",
+        })
+      }
       reset()
     } catch {
       toast.error("Something went wrong.", {
@@ -117,7 +125,6 @@ export function ContactSection() {
           <motion.div variants={containerVariants} className="space-y-4 font-sans text-xs text-white/60">
             {[
               { href: "mailto:abhayvishwakarma0814@gmail.com", icon: Mail, label: "abhayvishwakarma0814@gmail.com" },
-              { href: "tel:+916302745191", icon: Phone, label: "+91 6302745191" },
               { href: undefined, icon: MapPin, label: "Hyderabad, India" },
             ].map(({ href, icon: Icon, label }, idx) => {
               const content = (
